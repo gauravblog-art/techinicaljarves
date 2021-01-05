@@ -52,7 +52,7 @@ def takecomand():
       return "None"
    return query
 
-def email(to,content):
+def emailSend(to,content):
    server=smtplib.SMTP('smpt.gmail.com', 587)
    server.ehlo()
    server.starttls()
@@ -117,17 +117,19 @@ if __name__ == '__main__':
          try:
             speak('what should i send ')
             content=takecomand()
-            to="20190802038@dypiu.ac.in"
-            email(to, content)
+            to=""
+            emailSend(to, content)
             speak('email has beem sended')
 
          except Exception as  e:
             print(e)
             speak("sorry sir your email is not sended. please chack it")
-            
+
             
          
-      elif 'sit' in query:
+      elif 'thank you' in query:
+
+         speak("welcome  sir its for you . enjoy it")
          break
 
 
