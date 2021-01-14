@@ -129,7 +129,7 @@ if __name__ == '__main__':
          
       elif 'thank you' in query:
 
-         speak("welcome  sir its for you . enjoy it")
+         speak("welcome sir i am for you . enjoy it")
          break
 
 

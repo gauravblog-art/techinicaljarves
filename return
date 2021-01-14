@@ -1,0 +1,194 @@
+[33mcommit a092d54bf76c32a67f103fe63c3489702fb19172[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: gaurav <g4gaurav892001@gmail.com>
+Date:   Tue Jan 5 18:35:06 2021 +0530
+
+     chage in email
+
+[1mdiff --git a/jarvis.py b/jarvis.py[m
+[1mindex 864d455..fdcb6b1 100644[m
+[1m--- a/jarvis.py[m
+[1m+++ b/jarvis.py[m
+[36m@@ -52,7 +52,7 @@[m [mdef takecomand():[m
+       return "None"[m
+    return query[m
+ [m
+[31m-def email(to,content):[m
+[32m+[m[32mdef emailSend(to,content):[m
+    server=smtplib.SMTP('smpt.gmail.com', 587)[m
+    server.ehlo()[m
+    server.starttls()[m
+[36m@@ -117,17 +117,19 @@[m [mif __name__ == '__main__':[m
+          try:[m
+             speak('what should i send ')[m
+             content=takecomand()[m
+[31m-            to="20190802038@dypiu.ac.in"[m
+[31m-            email(to, content)[m
+[32m+[m[32m            to=""[m
+[32m+[m[32m            emailSend(to, content)[m
+             speak('email has beem sended')[m
+ [m
+          except Exception as  e:[m
+             print(e)[m
+             speak("sorry sir your email is not sended. please chack it")[m
+[31m-            [m
+[32m+[m
+             [m
+          [m
+[31m-      elif 'sit' in query:[m
+[32m+[m[32m      elif 'thank you' in query:[m
+[32m+[m
+[32m+[m[32m         speak("welcome  sir its for you . enjoy it")[m
+          break[m
+ [m
+ [m
+
+[33mcommit 66bfcff6f02016bce9aff43eb28ca9f65a10bda9[m
+Author: gaurav <g4gaurav892001@gmail.com>
+Date:   Tue Jan 5 18:27:25 2021 +0530
+
+    just is add
+
+[1mdiff --git a/jarvis.py b/jarvis.py[m
+[1mnew file mode 100644[m
+[1mindex 0000000..864d455[m
+[1m--- /dev/null[m
+[1m+++ b/jarvis.py[m
+[36m@@ -0,0 +1,137 @@[m
+[32m+[m[32mimport pyttsx3[m
+[32m+[m[32mimport speech_recognition as sr[m
+[32m+[m[32mimport wikipedia[m
+[32m+[m[32mimport webbrowser[m
+[32m+[m[32mimport datetime[m
+[32m+[m[32mimport os[m
+[32m+[m[32mimport smtplib[m
+[32m+[m
+[32m+[m
+[32m+[m[32mengine=pyttsx3.init('sapi5')[m
+[32m+[m[32mvoices=engine.getProperty('voices')[m
+[32m+[m[32mengine.setProperty('voice',voices[0].id)[m
+[32m+[m
+[32m+[m[32mdef speak(audio):[m
+[32m+[m[32m   engine.say(audio)[m
+[32m+[m[32m   engine.runAndWait()[m
+[32m+[m[32mdef wishme():[m
+[32m+[m[32m   hour=int(datetime.datetime.now().hour)[m
+[32m+[m
+[32m+[m[32m   if hour>=0 and hour<12:[m
+[32m+[m[32m      speak("Good morning ")[m
+[32m+[m
+[32m+[m[32m   elif hour>12 and hour<=17:[m
+[32m+[m[32m      speak("Good afternoon ")[m
+[32m+[m[32m   else:[m
+[32m+[m[32m      speak("Good evening ")[m
+[32m+[m[32m   speak("I am Gaurav mishra  sir. pelase tell me how can i help you")[m
+[32m+[m
+[32m+[m
+[32m+[m[32mdef takecomand():[m
+[32m+[m
+[32m+[m[32m   r=sr.Recognizer()[m
+[32m+[m[32m   with sr.Microphone() as source:[m
+[32m+[m[32m      print("Linsting......")[m
+[32m+[m[32m      r.energy_threshold = 600 # minimum audio energy to consider for recording[m
+[32m+[m[32m      r.dynamic_energy_threshold = True[m
+[32m+[m[32m      r.dynamic_energy_adjustment_damping = 1[m
+[32m+[m[32m      r.dynamic_energy_ratio = 2[m
+[32m+[m[32m      r.pause_threshold = 1 # seconds of non-speaking audio before a phrase is considered complete[m
+[32m+[m[32m      r.operation_timeout = None[m
+[32m+[m
+[32m+[m[32m      audio=r.listen(source)[m
+[32m+[m
+[32m+[m[32m   try:[m
+[32m+[m[32m      print("Recognization.....")[m
+[32m+[m[32m      query=r.recognize_google(audio, language='en-in')[m
+[32m+[m[32m      print("user said :",query)[m
+[32m+[m[41m   [m
+[32m+[m[32m   except Exception as e:[m
+[32m+[m[32m      print(e)[m
+[32m+[m[32m      print(" please say that again......")[m
+[32m+[m[32m      return "None"[m
+[32m+[m[32m   return query[m
+[32m+[m
+[32m+[m[32mdef email(to,content):[m
+[32m+[m[32m   server=smtplib.SMTP('smpt.gmail.com', 587)[m
+[32m+[m[32m   server.ehlo()[m
+[32m+[m[32m   server.starttls()[m
+[32m+[m[32m   server.login('g4gaurav892001@gmail.com', '9955995957 ')[m
+[32m+[m[32m   server.sendmail('g4gaurav892001@gmail.com', to, content)[m
+[32m+[m[32m   server.close()[m
+[32m+[m
+[32m+[m
+[32m+[m[32mif __name__ == '__main__':[m
+[32m+[m
+[32m+[m[32m    wishme()[m
+[32m+[m
+[32m+[m[32m    while True:[m
+[32m+[m[32m      query=takecomand().lower()[m
+[32m+[m[32m      if 'wikipedia' in query:[m
+[32m+[m[32m         speak("serachingung....")[m
+[32m+[m[32m         query=query.replace("wikipedia", "")[m
+[32m+[m[32m         result=wikipedia.summary(query,sentences=2)[m
+[32m+[m[32m         speak("According to wikipifia....")[m
+[32m+[m[32m         print(result)[m
+[32m+[m[32m         speak(result)[m
+[32m+[m[32m      elif 'open youtube' in query:[m
+[32m+[m[32m         webbrowser.open("https://www.youtube.com/?gl=IN")[m
+[32m+[m[32m         speak("According to you....")[m
+[32m+[m[32m      elif 'open google' in query:[m
+[32m+[m
+[32m+[m[32m         webbrowser.open("google.com")[m
+[32m+[m
+[32m+[m[32m      elif 'open stack overflow' in query:[m
+[32m+[m
+[32m+[m[32m         webbrowser.open("stakoverflow.com")[m
+[32m+[m[32m      elif 'open facebook' in query:[m
+[32m+[m
+[32m+[m[32m         webbrowser.open("facebook.com")[m
+[32m+[m[32m      elif 'open amazone' in query:[m
+[32m+[m
+[32m+[m[32m         webbrowser.open("amazone.com")[m
+[32m+[m[32m      elif 'open email' in query:[m
+[32m+[m
+[32m+[m[32m         webbrowser.open("email.com")[m
+[32m+[m
+[32m+[m[32m      elif 'play music' in query:[m
+[32m+[m
+[32m+[m[32m         music_dir="C:\\Users\\acer\\Documents\\movies\\all song"[m
+[32m+[m[32m         song=os.listdir(music_dir)[m
+[32m+[m[32m         os.startfile(os.path.join(music_dir, song[0]))[m
+[32m+[m
+[32m+[m[32m      elif 'play video' in query:[m
+[32m+[m[32m         vedio_dir="C:\\Users\\acer\\Documents\\movies\\all vidio"[m
+[32m+[m[32m         vedio=os.listdir(vedio_dir)[m
+[32m+[m[32m         os.startfile(os.path.join(vedio_dir, vedio[26]))[m[41m   [m
+[32m+[m
+[32m+[m
+[32m+[m[32m      elif 'open code' in query:[m
+[32m+[m[32m         codepath="C:\\Users\\acer\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"[m
+[32m+[m[32m         os.startfile(codepath)[m
+[32m+[m[41m      [m
+[32m+[m[32m      elif 'the time' in query:[m
+[32m+[m[32m         start=datetime.datetime.now().strftime("%H:%M:%S")[m
+[32m+[m[32m         speak(f"ok sir i tell you , the time is {start}")[m
+[32m+[m[32m      elif 'email send to gaurav' in query:[m
+[32m+[m[32m         try:[m
+[32m+[m[32m            speak('what should i send ')[m
+[32m+[m[32m            content=takecomand()[m
+[32m+[m[32m            to="20190802038@dypiu.ac.in"[m
+[32m+[m[32m            email(to, content)[m
+[32m+[m[32m            speak('email has beem sended')[m
+[32m+[m
+[32m+[m[32m         except Exception as  e:[m
+[32m+[m[32m            print(e)[m
+[32m+[m[32m            speak("sorry sir your email is not sended. please chack it")[m
+[32m+[m[41m            [m
+[32m+[m[41m            [m
+[32m+[m[41m         [m
+[32m+[m[32m      elif 'sit' in query:[m
+[32m+[m[32m         break[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m[41m    [m
+[32m+[m[41m     [m
+\ No newline at end of file[m
